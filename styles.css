@@ -1,0 +1,151 @@
+/* styles.css */
+:root[data-theme="light"] {
+    --primary-bg: #e6f0fa;
+    --secondary-bg: #cce0f5;
+    --text-color: #1a1a1a;
+    --button-bg: #0077cc;
+    --button-text: #ffffff;
+}
+
+:root[data-theme="dark"] {
+    --primary-bg: #2e2e2e;
+    --secondary-bg: #3a3a3a;
+    --text-color: #e0e0e0;
+    --button-bg: #555;
+    --button-text: #fff;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-bg);
+    padding: 0.5rem 1rem;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.station-name {
+    font-size: 1.5rem;
+    text-align: center;
+    flex: 1;
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-menu .dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--secondary-bg);
+    border: 1px solid #aaa;
+    display: none;
+    flex-direction: column;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+.main-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.vehicle-images {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.image-container {
+    text-align: center;
+}
+
+.image-container img {
+    width: 300px;
+    height: auto;
+    border: 2px solid var(--secondary-bg);
+}
+
+.vehicle-data {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.number-plate label {
+    display: block;
+    font-weight: bold;
+}
+
+#plateNumber {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    width: 200px;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.hidden {
+    display: none;
+}
+
+.weight-display {
+    min-width: 250px;
+}
+
+#deckWeights {
+    background: var(--secondary-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    min-height: 50px;
+}
+
+@media (max-width: 768px) {
+    .vehicle-images {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vehicle-data {
+        flex-direction: column;
+        align-items: center;
+    }
+}

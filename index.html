@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weighbridge System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo"> <img src="/images/logo.png" alt="Logo" /> </div>
+    <h1 class="station-name">Nakuru Highway weighing</h1>
+    <div class="user-controls">
+      <i class="fas fa-bell"></i>
+      <div class="user-menu">
+        <span class="username">John Doe</span>
+        <div class="dropdown">
+          <button class="dropdown-toggle">Profile <i class="fas fa-caret-down"></i></button>
+          <div class="dropdown-menu">
+            <a href="#" id="toggleTheme">Toggle Dark/Light</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="vehicle-images">
+      <div class="image-container">
+        <h2>Front View</h2>
+        <img src="/images/front-placeholder.jpg" alt="Front View" id="frontImage" />
+      </div>
+      <div class="image-container">
+        <h2>Side View</h2>
+        <img src="/images/side-placeholder.jpg" alt="Side View" id="sideImage" />
+      </div>
+    </section>
+
+    <section class="vehicle-data">
+      <div class="number-plate">
+        <label for="plateNumber">Plate Number</label>
+        <input type="text" id="plateNumber" disabled />
+        <button id="scanPlateBtn">Scan Plate</button>
+        <button id="editPlateBtn" class="hidden">Edit Plate</button>
+      </div>
+      <div class="weight-display">
+        <h3>Deck Weights</h3>
+        <div id="deckWeights">
+          <!-- Deck weight readings will go here -->
+        </div>
+        <button id="takeWeightBtn">Take Weight</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
