@@ -5,6 +5,8 @@
     --text-color: #1a1a1a;
     --button-bg: #0077cc;
     --button-text: #ffffff;
+    --modal-bg: rgba(0, 0, 0, 0.5);
+    --modal-box-bg: #ffffff;
 }
 
 :root[data-theme="dark"] {
@@ -13,6 +15,8 @@
     --text-color: #e0e0e0;
     --button-bg: #555;
     --button-text: #fff;
+    --modal-bg: rgba(0, 0, 0, 0.7);
+    --modal-box-bg: #444;
 }
 
 body {
@@ -44,6 +48,10 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.stats {
+    font-size: 0.9rem;
 }
 
 .user-menu .dropdown {
@@ -92,6 +100,38 @@ body {
     width: 300px;
     height: auto;
     border: 2px solid var(--secondary-bg);
+    display: none;
+}
+
+.placeholder-text {
+    font-style: italic;
+    color: #888;
+}
+
+.deck-status {
+    display: flex;
+    justify-content: flex-start;
+    padding: 1rem;
+}
+
+#deckStatus {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    background-color: var(--secondary-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    min-width: 200px;
+    border: 1px solid #bbb;
+}
+
+#deckStatus span {
+    font-weight: bold;
+    border-bottom: 1px solid #999;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    display: block;
 }
 
 .vehicle-data {
@@ -136,6 +176,50 @@ button.hidden {
     border-radius: 6px;
     margin-bottom: 1rem;
     min-height: 50px;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg);
+}
+
+.modal-box {
+    position: relative;
+    background-color: var(--modal-box-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    z-index: 10;
+    text-align: center;
+    max-width: 90%;
+}
+
+#modalOkBtn {
+    margin-top: 1rem;
+    background: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
