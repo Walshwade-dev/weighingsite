@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Weighbridge</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo" />
+        </div>
+        <h1 class="station-name">Admin Dashboard</h1>
+        <div class="user-controls">
+            <span id="currentUser"></span>
+            <button id="logoutBtn">Logout</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section>
+            <input type="date" id="logDatePicker" />
+
+            <table id="logTable">
+                <thead>
+                    <tr>
+                        <th>Plate</th>
+                        <th>Front Axle</th>
+                        <th>Rear Axle</th>
+                        <th>Total</th>
+                        <th>Timestamp</th>
+                        <th>Officer</th>
+                        <th>Role</th>
+                        <th>Reweigh</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <h2>Download Daily Weigh Log</h2>
+            <p>This CSV will include all vehicle weigh-ins for today.</p>
+            <button id="downloadCSVBtn">Download CSV</button>
+        </section>
+
+        <section>
+            <h2>Today’s Summary</h2>
+            <div id="summaryContainer" style="font-size: 0.95rem;"></div>
+        </section>
+    </main>
+
+    <script type="module" src="js/admin.js"></script>
+</body>
+
+</html>

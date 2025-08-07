@@ -11,21 +11,26 @@
 
 <body>
     <header class="header">
-        <div class="logo"> <img src="/images/logo.png" alt="Logo" /> </div>
+        <div class="logo">
+            <img src="images/logo.png" alt="Naku-private" />
+        </div>
         <h1 class="station-name">Nakuru Highway Weighing</h1>
         <div class="user-controls">
+            <div>
+                <span id="currentDate"></span>
+            </div>
             <div class="stats">
                 <i class="fas fa-chart-bar"></i>
                 <span id="vehicleCount">Vehicles Weighed Today: 0</span>
             </div>
             <i class="fas fa-bell"></i>
             <div class="user-menu">
-                <span class="username">John Doe</span>
+                <span class="username" id="currentUser">User</span>
                 <div class="dropdown">
                     <button class="dropdown-toggle">Profile <i class="fas fa-caret-down"></i></button>
                     <div class="dropdown-menu">
                         <a href="#" id="toggleTheme">Toggle Dark/Light</a>
-                        <a href="#">Logout</a>
+                        <a href="#" id="logoutLink">Logout</a>
                     </div>
                 </div>
             </div>
@@ -35,6 +40,7 @@
     <main class="main-content">
         <section class="deck-status">
             <div id="deckStatus"><span>Deck Status:</span>No vehicle on deck</div>
+            <button id="simulateBtn">Simulate Vehicle</button>
         </section>
 
         <section class="vehicle-images">
@@ -57,17 +63,28 @@
                 <button id="scanPlateBtn">Scan Plate</button>
                 <button id="editPlateBtn" class="hidden">Edit Plate</button>
             </div>
+
             <div class="weight-display">
                 <h3>Deck Weights</h3>
                 <div id="deckWeights">
-                    <!-- Deck weight readings will go here -->
+                    <div id="deckWeights">
+                        <p>Front Axle Weight: <span id="axleWeight">0</span> kg</p>
+                        <p>Rear Axle Weight: <span id="rearAxleWeight">0</span> kg</p>
+                        <p>Total Vehicle Weight: <span id="totalWeight">0</span> kg</p>
+                    </div>
                 </div>
-                <button id="takeWeightBtn">Weigh Front Axle</button>
+
+
+                <div class="button-group">
+                    <button id="takeWeightBtn">Take Weight</button>
+                    <button id="finishBtn" disabled>Finish</button>
+                    <button id="downloadCSVBtn" class="admin-only">Download CSV</button>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Modal Prompt -->
+    <!-- Modal -->
     <div id="customModal" class="modal hidden">
         <div class="modal-overlay"></div>
         <div class="modal-box">
@@ -76,7 +93,8 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="/js/index.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 
 </html>
