@@ -25,10 +25,12 @@
             </div>
             <i class="fas fa-bell"></i>
             <div class="user-menu">
-                <span class="username" id="currentUser">User</span>
-                <div class="dropdown">
-                    <button class="dropdown-toggle">Profile <i class="fas fa-caret-down"></i></button>
-                    <div class="dropdown-menu">
+                <span class="username" id="currentUser"></span>
+                <div class="user-menu dropdown">
+                    <button class="dropdown-toggle" id="dropdownToggle">
+                        <span class="username" id="currentUser">USER</span> ⌄
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
                         <a href="#" id="toggleTheme">Toggle Dark/Light</a>
                         <a href="#" id="logoutLink">Logout</a>
                     </div>
@@ -78,7 +80,6 @@
                 <div class="button-group">
                     <button id="takeWeightBtn">Take Weight</button>
                     <button id="finishBtn" disabled>Finish</button>
-                    <button id="downloadCSVBtn" class="admin-only">Download CSV</button>
                 </div>
             </div>
         </section>

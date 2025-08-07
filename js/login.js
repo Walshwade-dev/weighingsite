@@ -9,14 +9,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("loginForm");
+  const loginBtn = document.getElementById("loginBtn");
 
-  if (!loginForm) {
-    console.error("Login form not found.");
+  if (!loginBtn) {
+    console.error("❌ Login button not found in DOM.");
     return;
   }
 
-  loginForm.addEventListener("submit", async (e) => {
+  loginBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 
     const email = document.getElementById("username").value.trim();
@@ -25,26 +25,33 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      console.log("User UID:", user.uid);
+      console.log("✅ Logged in as:", user.email);
+      console.log("🔑 UID:", user.uid);
 
       const userDocRef = doc(db, "users", user.uid);
+      console.log("📄 Checking Firestore path:", userDocRef.path);
+
       const userSnap = await getDoc(userDocRef);
+      console.log("🧾 Snapshot exists:", userSnap.exists());
 
       if (userSnap.exists()) {
         const userData = userSnap.data();
-        const role = userData.role || "user";
+        console.log("📦 Firestore data:", userData);
 
+        const role = userData.role || "user";
         localStorage.setItem("username", email);
         localStorage.setItem("role", role);
 
-        window.location.href = role === "admin" ? "admin.html" : "index.html";
+        const redirectPage = role === "admin" ? "admin.html" : "index.html";
+        console.log("➡️ Redirecting to:", redirectPage);
+        window.location.replace(redirectPage);
       } else {
+        console.warn("⚠️ Firestore document not found!");
         alert("User record not found in Firestore. Please contact admin.");
         await signOut(auth);
       }
-
     } catch (error) {
+      console.error("❌ Login failed:", error);
       alert("Login failed: " + error.message);
     }
   });

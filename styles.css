@@ -35,12 +35,12 @@ body {
 }
 
 .logo img {
-    height: 40px;
+    height: 80px;
 }
 
 .station-name {
     font-size: 1.5rem;
-    text-align: center;
+    margin-left: 48rem;
     flex: 1;
 }
 
@@ -305,6 +305,38 @@ button.hidden {
 button#downloadCSVBtn {
     margin-top: 0.5rem;
 }
+
+.dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background-color: var(--secondary-bg);
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    min-width: 160px;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-menu a {
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--primary-bg);
+    font-weight: bold;
+}
+
 
 
 @media (max-width: 768px) {

@@ -4,6 +4,8 @@ import {
   query, where, orderBy, limit, getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { generatePDFReceipt } from './receipt.js';
+
 
 // === Constants ===
 const FRONT_AXLE_LIMIT = 8000;
@@ -19,20 +21,22 @@ let reweighCount = 0;
 let vehicleOnDeck = false;
 
 // === Auth & Role Check ===
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "login.html";
     return;
   }
 
-  const username = localStorage.getItem("username") || user.email;
-  const role = localStorage.getItem("role");
+  const userDoc = await getDoc(doc(db, "users", user.uid));
+  const data = userDoc.exists() ? userDoc.data() : {};
+  const displayName = data.displayName || user.email.split("@")[0];
 
-  document.getElementById("currentUser").textContent = username?.toUpperCase() || "USER";
+  document.getElementById("currentUser").textContent = displayName.toUpperCase();
+  localStorage.setItem("username", displayName);
+  localStorage.setItem("role", data.role || "user");
 
-  if (role !== "admin") {
-    const downloadCSVBtn = document.getElementById("downloadCSVBtn");
-    if (downloadCSVBtn) downloadCSVBtn.style.display = "none";
+  if (data.role !== "admin") {
+    document.getElementById("downloadCSVBtn")?.style.setProperty("display", "none");
   }
 });
 
@@ -166,6 +170,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const axleWeightEl = document.getElementById("axleWeight");
   const rearAxleWeightEl = document.getElementById("rearAxleWeight");
   const totalWeightEl = document.getElementById("totalWeight");
+
+  const toggle = document.getElementById("dropdownToggle");
+  const menu = document.getElementById("dropdownMenu");
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("show");
+    });
+
+    // Optional: Hide menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove("show");
+      }
+    });
+  }
+
+
+  const themeToggle = document.getElementById("toggleTheme");
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
+
+    // Load saved theme on startup
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+  }
+
 
   simulateBtn.addEventListener("click", () => {
     if (vehicleOnDeck) return showModal("A vehicle is already on the deck.");
